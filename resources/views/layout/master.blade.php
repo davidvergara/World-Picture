@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Picture World </title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+
 
 </head>
 <body>
@@ -74,33 +77,20 @@
                             </li>
 
 
-                            <li><a href="#mymap" data-toggle="tab">  <span class="glyphicon glyphicon-globe"></span>  My Map</a>
+                            <li><a href="#mymap" data-toggle="tab" onclick="initMap()">  <span class="glyphicon glyphicon-globe"></span>  My Map</a>
 
                             </li>
                             <li><a href="#other" data-toggle="tab">Other</a></li>
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="mypictures"> <h4> My pictures  </h4>  </div>
+                            <div class="tab-pane fade in active" id="mypictures"> <h4> My pictures  </h4>
+                            </div>
 
-                            <div class="tab-pane fade" id="mymap"> <h4>
-
-                                    <style>
-                                        #map-canvas{
-                                            weight: 780px;
-                                            height: 300px;
-                                        }
-
-                                    </style>
-
-                                    <script src="ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"> </script>
-                                    <script async defer
-                                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&callback=initMap">
-                                    </script>
-
+                            <div class="tab-pane fade" id="mymap" > <h4>
 
                                     <div class="container">
-                                        <div class="col-sm-6">
+                                        <div class="col-md-8 ">
                                             <h1> Add a picture - Location </h1>
                                             {!! Form::open(array('url'=> 'auth/map' , 'files' => true))!!}
 
@@ -112,7 +102,8 @@
                                             <div class="form-group">
                                                 <label for="Map"> Map   </label>
                                                 <input type="text" id="searchmap">
-                                                <div id="map-canvas"> </div>
+                                                <div id="map-canvas"></div>
+
                                             </div>
 
                                             <div class="form-group">
@@ -131,19 +122,7 @@
                                             {!! Form::close()!!}
                                         </div>
                                     </div>
-
-                                    <script>
-                                        function initMap() {
-                                        var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                                            center: {lat:  44.5403, lng: -78.5463},
-                                            scrollwheel: false,
-                                            zoom: 8
-                                        });
-
-
-                                        }
-
-                                    </script> </h4> </div>
+                                </h4> </div>
 
                             <div class="tab-pane fade" id="other"> <h4> Other </h4> Other stuff </div>
                         </div>
@@ -167,6 +146,35 @@
         <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-@yield('scripts')
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"> </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&callback=initMap" async="async">
+    </script>
+
+
+    <script>
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                center: {lat:  48.614399, lng: 21.616646},
+                scrollwheel: true,
+                zoom: 2
+            });
+        });
+    </script>
+
+    <style>
+        #map-canvas{
+            weight: 850px;
+            height: 300px;
+        }
+    </style>
+
+
+
+
+
+
+    @yield('scripts')
 </body>
 </html>
