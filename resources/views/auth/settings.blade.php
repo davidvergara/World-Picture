@@ -78,8 +78,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email"> Change your e-mail </label>
-                            <input type="email" id="email" class="form-control" name="email" placeholder={{ Auth::user()->email }}>
+                            <label for="email"> Your e-mail </label>
+                            <input type="email" id="email" class="form-control" disabled="disabled" name="email" placeholder={{ Auth::user()->email }}>
                         </div>
 
                         <div class="form-group">
