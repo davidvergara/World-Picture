@@ -43,6 +43,9 @@ Route::put('updateroute/{id}', [ 'uses' => 'UserController@update',
     'as' => 'updateroute'] );
 
 
+Route::post('storage/create', [ 'uses' => 'StorageController@save',
+    'as' =>'storage/create']);
+
 /*Route::post('settings', [ 'uses' => 'UserController@update',
     'as' => 'settings'] );*/
 
