@@ -91,7 +91,7 @@
 
                                     <div class="container">
                                         <div class="col-md-8 ">
-                                            <h1> Add a picture - Location </h1>
+                                            <h1> My Map test - Add a picture  </h1>
                                             {!! Form::open(array('url'=> 'auth/map' , 'files' => true))!!}
 
                                             <div class="form-group">
@@ -100,9 +100,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="Map"> Map   </label>
-                                                <input type="text" id="searchmap">
-                                                <div id="map-canvas"></div>
+
+                                                <div id="map-canvas" style="width:780px;height:410px;"></div>
 
                                             </div>
 
@@ -158,23 +157,12 @@
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat:  48.614399, lng: 21.616646},
                 scrollwheel: true,
-                zoom: 2
+                zoom: 2,
+                mapTypeId: google.maps.MapTypeId.HYBRID
             });
+
         });
     </script>
-
-    <style>
-        #map-canvas{
-            weight: 850px;
-            height: 300px;
-        }
-    </style>
-
-
-
-
-
-
-    @yield('scripts')
+ @yield('scripts')
 </body>
 </html>
