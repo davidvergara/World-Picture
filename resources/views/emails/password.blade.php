@@ -1,0 +1,1 @@
+Follow the link to reset your password {{url('password/reset/'.$token)}}
