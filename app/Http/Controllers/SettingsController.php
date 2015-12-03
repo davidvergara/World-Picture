@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Validator;
+use Request;
+use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class SettingsController extends Controller
 {
@@ -71,9 +74,17 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( $id)
     {
-     //
+        $user = User::find($id);
+        $user->fill(Request::all());
+        $user->save();
+
+        Session::flash('flash_message', 'Well done! Your changes have been saved.');
+        Session::flash('flash_type', 'alert-success');
+
+        return redirect::to('/showpictures');
+
     }
 
     /**

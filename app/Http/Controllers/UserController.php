@@ -81,14 +81,7 @@ class UserController extends Controller
 	 */
 	public function update($id)
 	{
-		$user = User::find($id);
-		$user->fill(Request::all());
-		$user->save();
-
-        Session::flash('flash_message', 'Well done! Your changes have been saved.');
-        Session::flash('flash_type', 'alert-success');
-
-        return redirect::to('/showpictures');
+		//
 
 	}
 
