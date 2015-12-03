@@ -96,7 +96,20 @@ class StorageController extends Controller
      */
     public function show()
     {
-        $thumbnails = Fileentry::all();
+        //$pictures = Fileentry::all();
+        $userId = Auth::user()->id;
+        $thumbnails = \DB::table('fileentries')
+            ->where(function ($query) use ($userId) {
+                $query->select('fileentries.id', 'fileentries.user_id', 'fileentries.filename'
+                    , 'fileentries.path', 'fileentries.lattitude', 'fileentries.longitude'
+                    , 'fileentries.created_at', 'fileentries.updated_at')
+                    ->where('fileentries.user_id', '=', $userId);
+            })->get();
+
+
+
+
+        //$thumbnails = Fileentry::all();
         return view('layout.master2', compact('thumbnails'));
     }
 

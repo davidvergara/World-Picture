@@ -99,7 +99,7 @@
                                                         <div class="col-lg-5 col-md-8 col-xs-8">
                                                             <div class="thumbnail">
 
-                                                                <img src="pictures/{{$thumbnail->filename}}" alt="{{$thumbnail->file}}">
+                                                                <img src="pictures/{{$thumbnail->filename}}">
                                                                 <div class="caption">
                                                                     <h6>{{$thumbnail->filename}}</h6>
                                                                 </div>

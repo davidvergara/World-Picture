@@ -13,7 +13,7 @@ class FileEntryController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Responsec
      */
     public function index()
     {
