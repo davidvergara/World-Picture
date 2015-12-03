@@ -30,12 +30,12 @@ class AuthController extends Controller
      *
      * @return void
      */
-   /* public function __construct(Guard $auth, Registrar $registrar )
-    {
-        $this->auth=$auth;
-        $this->registrar=$registrar;
-        $this->middleware('guest', ['except' => 'getLogout']);
-    }*/
+    /* public function __construct(Guard $auth, Registrar $registrar )
+     {
+         $this->auth=$auth;
+         $this->registrar=$registrar;
+         $this->middleware('guest', ['except' => 'getLogout']);
+     }*/
 
     public function __construct()
     {
@@ -78,26 +78,25 @@ class AuthController extends Controller
         dd($request->all());
     }
 
-      /**
-         * Get the path to the login route.
-         *
-         * @return string
-         */
-        public function loginPath()
-        {
-            return route('login');
-        }
+    /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
+    public function loginPath()
+    {
+        return route('login');
+    }
 
-         /**
-             * Get the post register / login redirect path.
-             *
-             * @return string
-             */
-            public function redirectPath()
-            {
-                return route('home');
-            }
-    ñl
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return route('home');
+    }
 
 
 }

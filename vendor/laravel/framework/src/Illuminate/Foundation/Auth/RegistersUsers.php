@@ -27,9 +27,8 @@ trait RegistersUsers
      */
     public function postRegister(Request $request)
     {
+        $validator = $this->validator($request->all());
 
-       /* $validator = $this->validator($request->all());
-       // protected $redirectTo = '/showpictures';
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
@@ -38,8 +37,6 @@ trait RegistersUsers
 
         Auth::login($this->create($request->all()));
 
-        return redirect($this->redirectPath());*/
-        $this->postRegister($request);
-        return redirect('/showpictures');
+        return redirect($this->redirectPath());
     }
 }
