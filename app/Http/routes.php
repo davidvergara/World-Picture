@@ -27,10 +27,6 @@ Route::get('logout', [ 'uses' => 'Auth\AuthController@getLogout',
 //CONTACT....
 Route::get('contact', [ 'uses' => 'ContactController@index',
     'as' => 'contact'] );
-/*
-//CONTACT....
-Route::post('contactsend', [ 'uses' => 'ContactController@store',
-    'as' => 'contactsend'] );*/
 
 Route::resource('mail', 'ContactController');
 
@@ -39,7 +35,7 @@ Route::resource('mail', 'ContactController');
 Route::get('settings', [ 'uses' => 'UserController@settings',
     'as' => 'settings'] );
 
-Route::put('updateroute/{id}', [ 'uses' => 'UserController@update',
+Route::put('updateroute/{id}', [ 'uses' => 'SettingsController@update',
     'as' => 'updateroute'] );
 
 
