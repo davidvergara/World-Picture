@@ -49,9 +49,6 @@ class ContactController extends Controller
             Session::flash('flash_type', 'alert-success');
 
 
-
-
-
         });
         if (Auth::guest())
           return redirect::to('/');

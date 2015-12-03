@@ -136,12 +136,12 @@
 
                                             <div class="form-group">
                                                 <label for="Lat"> Lat </label>
-                                                <input type="text" class=form-control" name="lat" id="lat">
+                                                <input type="text" class=form-control" name="lat" id="lat" >
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="Long"> Long </label>
-                                                <input type="text" class=form-control" name="lng" id="lng">
+                                                <input type="text" class=form-control" name="lng" id="lng" required>
                                             </div>
 
                                             <button type="submit" class="btn btn-success" style="margin-right: 15px;">
@@ -168,21 +168,21 @@
                                                         <div class="form-group">
                                                             <label class="col-md-4 control-label">New file</label>
                                                             <div class="col-md-6">
-                                                                <input type="file" class="form-control" name="file" >
+                                                                <input type="file" class="form-control" name="file" aria-required="true" >
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="col-md-4 control-label">Lattitude </label>
                                                             <div class="col-md-6">
-                                                                <input type="text" class="form-control" name="lat"  placeholder="48.614399">
+                                                                <input type="text" class="form-control" name="lat"  aria-required="true">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="col-md-4 control-label">Longitude</label>
-                                                            <div class="col-md-6">
-                                                                <input type="text" class="form-control" name="lng"  placeholder="-21.616646">
+                                                            <div class="col-md-6" aria-required="">
+                                                                <input type="text" class="form-control" name="lng"  aria-required="true">
                                                             </div>
                                                         </div>
 

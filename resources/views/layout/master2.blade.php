@@ -164,24 +164,24 @@
 
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="form1">
                                                             <label class="col-md-4 control-label">New file</label>
                                                             <div class="col-md-6">
-                                                                <input type="file" class="form-control" name="file" >
+                                                                <input type="file" class="form-control" name="file" required="true">
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="form2">
                                                             <label class="col-md-4 control-label">Lattitude </label>
                                                             <div class="col-md-6">
-                                                                <input type="text" class="form-control" name="lat"  placeholder="48.614399">
+                                                                <input type="number" class="form-control" name="lat"  placeholder="48.614399" required="true">
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="form3">
                                                             <label class="col-md-4 control-label">Longitude</label>
                                                             <div class="col-md-6">
-                                                                <input type="text" class="form-control" name="lng"  placeholder="-21.616646">
+                                                                <input type="number" class="form-control" name="lng"  placeholder="-21.616646" required="true">
                                                             </div>
                                                         </div>
 
@@ -236,6 +236,45 @@
 
 
 
+        });
+
+        $('#form1 input[type=file]').on('change invalid', function() {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+                textfield.setCustomValidity('Please add a picture!');
+            }
+        });
+
+        $('#form2 input[type=number]').on('change invalid', function() {
+            var textfield2 = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield2.setCustomValidity('');
+
+            if (!textfield2.validity.valid) {
+                textfield2.setCustomValidity('Please add a lattitude!');
+            }
+        });
+
+        $('#form3 input[type=number]').on('change invalid', function() {
+            var textfield3 = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield3.setCustomValidity('');
+
+            if (!textfield3.validity.valid) {
+                textfield3.setCustomValidity('Please add a longitude!');
+            }
         });
     </script>
     @yield('scripts')
