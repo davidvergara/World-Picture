@@ -50,7 +50,7 @@ class ContactController extends Controller
             /*$redirectPath = '/';
 
             return Redirect::to('/');*/
-            return redirect::to('/');
+            return redirect('/');
 
 
         });

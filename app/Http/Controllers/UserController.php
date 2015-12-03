@@ -88,7 +88,7 @@ class UserController extends Controller
         Session::flash('flash_message', 'Well done! Your changes have been saved.');
         Session::flash('flash_type', 'alert-success');
 
-        return redirect::to('/');
+        return redirect::to('/showpictures');
 
 	}
 

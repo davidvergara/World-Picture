@@ -33,7 +33,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
+                <li><a href="{{(route('showpictures')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
                 <li><a href="{{ (route('contact')) }}"> <span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
 
@@ -101,7 +101,9 @@
 
                                                                 <img src="pictures/{{$thumbnail->filename}}">
                                                                 <div class="caption">
-                                                                    <h6>{{$thumbnail->filename}}</h6>
+                                                                    {!! Form::open(array('route' => array('deletepictures', $thumbnail->filename), 'method' => 'delete')) !!}
+                                                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'onclick'=>"return confirm('Are you sure you want to delete this picture?')"]) !!}
+                                                                    {!! Form::close() !!}
                                                                 </div>
                                                             </div>
                                                         </div>

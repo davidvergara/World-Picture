@@ -29,7 +29,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/"> <span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a href="{{(route('showpictures')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
                 <li><a href="{{ (route('contact')) }}"> <span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
 

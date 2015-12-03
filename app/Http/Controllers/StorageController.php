@@ -43,7 +43,7 @@ class StorageController extends Controller
             Session::flash('flash_message', 'Alert! The name of the picture is already in use.');
             Session::flash('flash_type', 'alert-danger');
 
-            return redirect::to('/');
+            return redirect::to('/showpictures');
         }
 
 
@@ -64,7 +64,7 @@ class StorageController extends Controller
         Session::flash('flash_message', 'Well done! Your picture has been uploaded succesfully.');
         Session::flash('flash_type', 'alert-success');
 
-        return redirect::to('/');
+        return redirect::to('/showpictures');
     }
 
     /**
@@ -112,6 +112,19 @@ class StorageController extends Controller
         //$thumbnails = Fileentry::all();
         return view('layout.master2', compact('thumbnails'));
     }
+
+    public function delete($picture)
+    {
+
+
+        \DB::table('fileentries')->where('filename', $picture)->delete();
+        \Storage::delete($picture);
+        //\Storage::disk('local')->delete('filename');
+
+        //$thumbnails = Fileentry::all();
+        return redirect::to('/showpictures');
+    }
+
 
     /**
      * Show the form for editing the specified resource.

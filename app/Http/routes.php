@@ -56,6 +56,9 @@ Route::get('usermain', [ 'uses' => 'UserController@index',
 Route::get('showpictures', [ 'uses' => 'StorageController@show',
     'as' => 'showpictures'] );
 
+Route::delete('deletepictures/{picture}', [ 'uses' => 'StorageController@delete',
+    'as' => 'deletepictures'] );
+
 // Registration routes...
 Route::get('register', ['uses' => 'Auth\AuthController@getRegister',
 'as' => 'register']);
