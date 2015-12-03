@@ -76,7 +76,6 @@ class StorageController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -97,6 +96,7 @@ class StorageController extends Controller
     public function show()
     {
         //$pictures = Fileentry::all();
+        echo "Hola vengo de delete";
         $userId = Auth::user()->id;
         $thumbnails = \DB::table('fileentries')
             ->where(function ($query) use ($userId) {
@@ -110,7 +110,7 @@ class StorageController extends Controller
 
 
         //$thumbnails = Fileentry::all();
-        return view('layout.master2', compact('thumbnails'));
+        return view('/showpictures', compact('thumbnails'));
     }
 
     public function delete($picture)
