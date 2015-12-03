@@ -53,6 +53,8 @@ Route::post('storage/create', [ 'uses' => 'StorageController@save',
 Route::get('usermain', [ 'uses' => 'UserController@index',
     'as' => 'usermain'] );
 
+Route::get('showpictures', [ 'uses' => 'StorageController@show',
+    'as' => 'showpictures'] );
 
 // Registration routes...
 Route::get('register', ['uses' => 'Auth\AuthController@getRegister',

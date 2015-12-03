@@ -6,8 +6,8 @@ use Validator;
 use Session;
 use Request;
 use Mail;
-use Redirect;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
 {
@@ -47,9 +47,10 @@ class ContactController extends Controller
             Session::flash('flash_message', 'Your e-mail has been sent!');
             Session::flash('flash_type', 'alert-success');
 
-            $redirectPath = '/';
+            /*$redirectPath = '/';
 
-            return Redirect::to('/');
+            return Redirect::to('/');*/
+            return redirect::to('/');
 
 
         });

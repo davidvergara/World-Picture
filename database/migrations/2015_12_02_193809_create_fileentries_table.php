@@ -18,8 +18,8 @@ class CreateFileentriesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('filename');
             $table->string('path');
-            $table->decimal('lattitude', 6, 6);
-            $table->decimal('longitude', 6, 6);
+            $table->decimal('lattitude', 9, 6);
+            $table->decimal('longitude', 9, 6);
 
             $table->timestamps();
         });

@@ -89,33 +89,30 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="mypictures"> <h4> My pictures  </h4>
                                 <div class="container">
-                                    <div class="col-md-6 ">
-
-                                        <?php $thumbnails=''; ?>
-
+                                    <div class="col-lg-10 ">
                                         @if ( $thumbnails=='')
                                             {!!  link_to_route('showpictures', 'Show pictures', null, array('class' => 'btn btn-primary')) !!}
                                         @elseif($thumbnails != '')
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        @foreach($thumbnails as $thumbnail)
-                                                            <div class="col-sm-6">
-                                                                <div class="thumbnail">
-                                                                    {{ $thumbnail }}
-                                                                    <img src="pictures/{{$thumbnail->filename}}">
-                                                                    <div class="caption">
-                                                                        <h3>{{$thumbnail->name}}</h3>
-                                                                    </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    @foreach($thumbnails as $thumbnail)
+                                                        <div class="col-lg-5 col-md-8 col-xs-8">
+                                                            <div class="thumbnail">
+
+                                                                <img src="pictures/{{$thumbnail->filename}}" alt="{{$thumbnail->file}}">
+                                                                <div class="caption">
+                                                                    <h6>{{$thumbnail->filename}}</h6>
                                                                 </div>
                                                             </div>
-                                                        @endforeach
-                                                    </div>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
+                                            </div>
 
                                         @endif
+                                    </div>
                                 </div>
                             </div>
-                                </div>
 
                             <div class="tab-pane fade" id="mymap" > <h4>
 
@@ -212,13 +209,13 @@
         </div>
     </div>
 
- @endif
+    @endif
 
 
 
-        <!-- Scripts -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+            <!-- Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&callback=initMap" async="async">
@@ -239,6 +236,6 @@
 
         });
     </script>
- @yield('scripts')
+    @yield('scripts')
 </body>
 </html>
