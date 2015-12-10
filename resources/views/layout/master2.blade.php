@@ -12,9 +12,8 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
 
-
 </head>
-<body>
+<body onload=" doClickFunct()">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -82,6 +81,9 @@
                             </li>
                             <li><a href="#other"  data-toggle="tab"> <span class="glyphicon glyphicon-picture"></span> Upload pictures </a></li>
 
+
+
+
                                 <div class="tab-content">
                                     <div class="tab-pane fade" id="mypictures"> <h4> My pictures  </h4>
                                         <div class="container">
@@ -120,11 +122,14 @@
 
                                             <div class="container">
                                                 <div class="col-md-8 ">
-                                                    <h1> My Map test </h1>
+                                                    <h1> My Map test
+                                                        <script>doClickFunct();</script>
+                                                    </h1>
                                                     <br>
                                                     <div class="form-group">
                                                         <div id="map-canvas" style="width:780px;height:410px;"></div>
                                                     </div>
+
 
                                                     {!!  link_to_route('showmap', 'Show my pictures', null, array('class' => 'btn btn-primary')) !!}
 
@@ -245,6 +250,7 @@
                                                 <br>
                                                 <div class="form-group">
                                                     <div id="map-canvas" style="width:780px;height:410px;"></div>
+
                                                 </div>
 
                                                 {!!  link_to_route('showmap', 'Show my pictures', null, array('class' => 'btn btn-primary')) !!}
@@ -340,29 +346,65 @@
 
 
     <script>
+          if("{{$control}}"=="map"){
+                var trocolasion = <?php echo json_encode("{{$thumbnails}}");?>
+              trocolasion.forEach(function(item){
+
+                    var lat = trocolasion[i].la;
+                    var lon = "{{$thumbnails[i]->longitude}}";
 
 
-        $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', function(event){
+                    var marker2 = new google.maps.Marker({
+                        position: {
+                            lat: lat,
+                            lng: lon
+                        },
+                        map: map,
+                        title: 'First test!',
+                        draggable: false
+                    });
+
+                });
+              for each(var item in "{{$thumbnails}}") {
+
+                  var lat = "{{$thumbnails[i]->lattitude}}";
+                  var lon = "{{$thumbnails[i]->longitude}}";
+
+
+                  var marker2 = new google.maps.Marker({
+                      position: {
+                          lat: lat,
+                          lng: lon
+                      },
+                      map: map,
+                      title: 'First test!',
+                      draggable: false
+                  });
+
+              }
+
+
+
+
+         }
+
+        //document.getElementById("#mymap").onclick();
+
+        //doClickFunct();
+
+        function doClickFunct(){
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat: 48.614399, lng: 21.616646},
                 scrollwheel: true,
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.HYBRID
-            });
+            });}
 
-        });
-        $('#myButton').on('click', function(event) {
+        $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', doClickFunct);
 
-        });
 
-        function fun1(){
-            var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                center: {lat: 48.614399, lng: 21.616646},
-                scrollwheel: true,
-                zoom: 2,
-                mapTypeId: google.maps.MapTypeId.HYBRID
-            });
-        }
+
+
 
         $('.nav-tabs a[href="#other"]').on('shown.bs.tab', function(event){
             var map2 = new google.maps.Map(document.getElementById('map-canvas2'), {
@@ -371,6 +413,7 @@
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.HYBRID
             });
+
 
 
             var marker = new google.maps.Marker({
