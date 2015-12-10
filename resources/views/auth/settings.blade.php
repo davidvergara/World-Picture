@@ -87,7 +87,7 @@
                             <input type="password" id="messages" class="form-control" name="password" >
                         </div>
 
-                        {!!  link_to_route('home', 'Back', null, array('class' => 'btn btn-primary')) !!}
+                        {!!  link_to_route('showpictures', 'Back', null, array('class' => 'btn btn-primary')) !!}
                         <button type="submit" class="btn btn-success"> Save changes </button>
                         {!! Form::close() !!}
 
@@ -97,6 +97,16 @@
     </div>
 </div>
 
+<style>
+
+    body {
+         background: url('{{ asset('bosqueGam.jpg') }}')  no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
 
 
             <!-- Scripts -->

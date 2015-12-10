@@ -105,11 +105,28 @@ class StorageController extends Controller
                     ->where('fileentries.user_id', '=', $userId);
             })->get();
 
+        $control = '';
+        //$thumbnails = Fileentry::all();
+        return view('layout.master2', compact('thumbnails' , 'control'));
+    }
 
+    public function showmap()
+    {
+        //$pictures = Fileentry::all();
+        $userId = Auth::user()->id;
+        $thumbnails = \DB::table('fileentries')
+            ->where(function ($query) use ($userId) {
+                $query->select('fileentries.id', 'fileentries.user_id', 'fileentries.filename'
+                    , 'fileentries.path', 'fileentries.lattitude', 'fileentries.longitude'
+                    , 'fileentries.created_at', 'fileentries.updated_at')
+                    ->where('fileentries.user_id', '=', $userId);
+            })->get();
 
+        $control = 'map';
+        echo $control;
 
         //$thumbnails = Fileentry::all();
-        return view('layout.master2', compact('thumbnails'));
+        return view('layout.master2', compact('thumbnails','control'));
     }
 
     public function delete($picture)
@@ -119,6 +136,9 @@ class StorageController extends Controller
         \DB::table('fileentries')->where('filename', $picture)->delete();
         \Storage::delete($picture);
         //\Storage::disk('local')->delete('filename');
+
+        Session::flash('flash_message', 'Well done! Your picture has been deleted succesfully.');
+        Session::flash('flash_type', 'alert-success');
 
         //$thumbnails = Fileentry::all();
         return redirect::to('/showpictures');

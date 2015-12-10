@@ -52,6 +52,9 @@ Route::get('usermain', [ 'uses' => 'UserController@index',
 Route::get('showpictures', [ 'uses' => 'StorageController@show',
     'as' => 'showpictures'] );
 
+Route::get('showmap', [ 'uses' => 'StorageController@showmap',
+    'as' => 'showmap'] );
+
 Route::delete('deletepictures/{picture}', [ 'uses' => 'StorageController@delete',
     'as' => 'deletepictures'] );
 

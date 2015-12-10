@@ -37,8 +37,6 @@
                 <li><a href="{{ (route('contact')) }}"> <span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
 
-
-
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}"> <span class="glyphicon glyphicon-log-in"></span>   Login</a></li>
@@ -58,13 +56,6 @@
     </div>
 </nav>
 
-@if ( Session::has('flash_message') )
-
-    <div class="alert {{ Session::get('flash_type') }}">
-        <h3>{{ Session::get('flash_message') }}</h3>
-    </div>
-
-@endif
 
 @if (Auth::guest())
     @yield('content')
@@ -240,5 +231,8 @@
         });
     </script>
  @yield('scripts')
+
+
+
 </body>
 </html>

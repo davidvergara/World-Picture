@@ -90,7 +90,7 @@
                             <label for="messages"> Message </label>
                             <textarea type="text" id="messages" class="form-control" name="messages" > </textarea>
                         </div>
-                        {!!  link_to_route('home', 'Back', null, array('class' => 'btn btn-primary')) !!}
+                        {!!  link_to_route('showpictures', 'Back', null, array('class' => 'btn btn-primary')) !!}
                         <button type="submit" class="btn btn-success"> Send </button>
 
                     {!! Form::close() !!}
