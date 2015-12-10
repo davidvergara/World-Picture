@@ -123,7 +123,6 @@ class StorageController extends Controller
             })->get();
 
         $control = 'map';
-        echo $control;
 
         //$thumbnails = Fileentry::all();
         return view('layout.master2', compact('thumbnails','control'));
