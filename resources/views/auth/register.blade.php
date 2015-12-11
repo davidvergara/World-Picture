@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
@@ -64,13 +64,15 @@
     </div>
 
 
-
     <style>
-        img.resize{
-            max-width:100%;
-            max-height:100%;
-        }
 
+        body {
+            background: url('{{ asset('bosqueRovaniemi1.JPG') }}')  no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 
 @endsection

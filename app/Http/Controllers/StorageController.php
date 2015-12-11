@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
@@ -10,6 +13,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Fileentry;
 use Illuminate\Support\Facades\Redirect;
+
+header("Content-type: text/javascript");
 
 class StorageController extends Controller
 {
@@ -26,7 +31,6 @@ class StorageController extends Controller
 
     public function save(Request $request)
     {
-
         $input = Request::all();
 
         $file = $input['file'];
@@ -107,10 +111,12 @@ class StorageController extends Controller
 
         $control = '';
         //$thumbnails = Fileentry::all();
+       // echo $thumbnails;
+
         return view('layout.master2', compact('thumbnails' , 'control'));
     }
 
-    public function showmap()
+    public function showmap1()
     {
         //$pictures = Fileentry::all();
         $userId = Auth::user()->id;
@@ -121,12 +127,11 @@ class StorageController extends Controller
                     , 'fileentries.created_at', 'fileentries.updated_at')
                     ->where('fileentries.user_id', '=', $userId);
             })->get();
-
         $control = 'map';
 
-        //$thumbnails = Fileentry::all();
-        return view('layout.master2', compact('thumbnails','control'));
+        return response()->json($thumbnails);
     }
+
 
     public function delete($picture)
     {

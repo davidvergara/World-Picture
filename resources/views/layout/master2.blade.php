@@ -81,9 +81,6 @@
                             </li>
                             <li><a href="#other"  data-toggle="tab"> <span class="glyphicon glyphicon-picture"></span> Upload pictures </a></li>
 
-
-
-
                                 <div class="tab-content">
                                     <div class="tab-pane fade" id="mypictures"> <h4> My pictures  </h4>
                                         <div class="container">
@@ -211,6 +208,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="mypictures"> <h4> My pictures  </h4>
                                     <div class="container">
+
                                         <div class="col-lg-10 ">
                                             @if ( $thumbnails=='')
                                                 {!!  link_to_route('showpictures', 'Show pictures', null, array('class' => 'btn btn-primary')) !!}
@@ -219,10 +217,10 @@
                                                     <div class="row">
                                                         @foreach($thumbnails as $thumbnail)
                                                             <div class="col-lg-5 col-md-8 col-xs-10">
+                                                                <div class="thumbnail" data-toggle="model">
 
-                                                                <div class="thumbnail">
-
-                                                                    <img id="imageresource" src="pictures/{{$thumbnail->filename}}" style="width:360px;height:240px;"></a></li>
+                                                                    <img data-toggle="modal" data-target="#mymodal" id="imageresource" src="pictures/{{$thumbnail->filename}}" style="width:360px;height:240px;"></a></li>
+                                                                    <h4 class="text-primary"><span class="label label-primary center-block">Name: {{$thumbnail->filename}}</span></h4>
                                                                     <h4 class="text-primary"><span class="label label-primary center-block">Lattitude: {{$thumbnail->lattitude}}</span></h4>
                                                                     <h4 class="text-primary"><span class="label label-primary center-block">Longitude: {{$thumbnail->longitude}}</span></h4>
                                                                     <div class="caption">
@@ -253,7 +251,9 @@
 
                                                 </div>
 
-                                                {!!  link_to_route('showmap', 'Show my pictures', null, array('class' => 'btn btn-primary')) !!}
+
+
+                                                <button class="btn btn-success" onclick="doClickFunct()"> Show pictures</button>
 
                                             </div>
                                         </div>
@@ -338,54 +338,32 @@
 
             <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&libraries=places&callback=initMap" async="async">
     </script>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <img id="mimg" src="" style="width:500px;height:400px;" >
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-    <script>
+    <script type="text/javascript">
+
           if("{{$control}}"=="map"){
-                var trocolasion = <?php echo json_encode("{{$thumbnails}}");?>
-              trocolasion.forEach(function(item){
-
-                    var lat = trocolasion[i].la;
-                    var lon = "{{$thumbnails[i]->longitude}}";
-
-
-                    var marker2 = new google.maps.Marker({
-                        position: {
-                            lat: lat,
-                            lng: lon
-                        },
-                        map: map,
-                        title: 'First test!',
-                        draggable: false
-                    });
-
-                });
-              for each(var item in "{{$thumbnails}}") {
-
-                  var lat = "{{$thumbnails[i]->lattitude}}";
-                  var lon = "{{$thumbnails[i]->longitude}}";
-
-
-                  var marker2 = new google.maps.Marker({
-                      position: {
-                          lat: lat,
-                          lng: lon
-                      },
-                      map: map,
-                      title: 'First test!',
-                      draggable: false
-                  });
-
-              }
-
-
-
-
          }
 
         //document.getElementById("#mymap").onclick();
@@ -398,12 +376,28 @@
                 scrollwheel: true,
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.HYBRID
-            });}
+
+            });
+
+
+            $.get('showmap', function(data){
+                console.log(data);
+                $.each(data, function(key,val){
+                    var nombre = val.filename;
+                    var latt = val.lattitude;
+                    var lng = val.longitude;
+
+                    var marker = new google.maps.Marker({
+                        position: {lat: latt, lng: lng},
+                        map: map,
+                        title: 'PENE!',
+                        draggable: false
+                    });
+                });
+            });
+        }
 
         $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', doClickFunct);
-
-
-
 
 
         $('.nav-tabs a[href="#other"]').on('shown.bs.tab', function(event){
@@ -482,9 +476,29 @@
             //Longitud: $thumbnails->longitude
             //icon: $thumbnails->filename
 
+          $(window).load(function(){
+              $('#imageresource').on('click',function()
+              {
+                  var sr=$(this).attr('src');
+                  $('#mimg').attr('src',sr);
+                  $('#myModal').modal('show');
+              });
+          });
+
 
 
     </script>
+
+    <style>
+
+        body {
+            background: url('{{ asset('puestasol.JPG') }}')  no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
 
 
     @yield('scripts')

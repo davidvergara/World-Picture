@@ -18,15 +18,18 @@
             </div>
         </div>
     </div>-->
-    <img class="resize" style="margin-top: -20px;" src="/bosqueHOME.jpg">
 
-    <style>
-        img.resize{
-            max-width:100%;
-            max-height:100%;
-        }
 
-    </style>
+<style>
+
+    body {
+        background: url('{{ asset('bosqueHOME.JPG') }}')  no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
 @endsection
 
 

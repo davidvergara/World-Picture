@@ -55,7 +55,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading"> <b> My account - {{ Auth::user()->name }} </b></div>
                 <div class="panel-body">
@@ -100,7 +100,7 @@
 <style>
 
     body {
-         background: url('{{ asset('bosqueGam.jpg') }}')  no-repeat center center fixed;
+         background: url('{{ asset('bosque3.jpg') }}')  no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
