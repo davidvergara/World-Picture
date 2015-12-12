@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Fileentry;
 use Illuminate\Support\Facades\Redirect;
 
-header("Content-type: text/javascript");
+
 
 class StorageController extends Controller
 {

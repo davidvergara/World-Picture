@@ -363,12 +363,6 @@
 
     <script type="text/javascript">
 
-          if("{{$control}}"=="map"){
-         }
-
-        //document.getElementById("#mymap").onclick();
-
-        //doClickFunct();
 
         function doClickFunct(){
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -379,7 +373,6 @@
 
             });
 
-
             $.get('showmap', function(data){
                 console.log(data);
                 $.each(data, function(key,val){
@@ -387,15 +380,39 @@
                     var latt = val.lattitude;
                     var lng = val.longitude;
 
+                    console.log(latt);
+                    console.log(lng);
+
+                    var image = {
+                        url: "pictures/"+nombre, //url
+                        scaledSize: new google.maps.Size(44, 32), // scaled size
+                        origin: new google.maps.Point(0, 0), // origin
+                        anchor: new google.maps.Point(0, 0) // anchor
+                    }
+
+
+
                     var marker = new google.maps.Marker({
                         position: {lat: latt, lng: lng},
                         map: map,
-                        title: 'PENE!',
-                        draggable: false
+                        title: nombre,
+                        animation: google.maps.Animation.DROP,
+                        draggable: false,
+                        icon: image
+
                     });
+                    var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
+                        content: '<img border="0" aling="Left" src=nombre >' + nombre
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
+                        infowindow.open(map,marker); // Open our InfoWindow
+                    });
+
                 });
             });
         }
+
 
         $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', doClickFunct);
 
