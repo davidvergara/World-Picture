@@ -72,7 +72,7 @@
 
 
                     {!! Form::model($user = Auth::user() , array('route' => array('updateroute', $user->id), 'method' => 'PUT')) !!}
-                        <div class="form-group">
+                        <div class="form-horizontal">
                             <label for="name"> Change your name </label>
                             <input type="text" id="name" class="form-control" name="name" value="{{ Auth::user()->name }}">
                         </div>

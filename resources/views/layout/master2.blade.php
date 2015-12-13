@@ -81,7 +81,7 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div class="tab-pane fade in active" id="mypictures"> <h4> My pictures  </h4>
+                                <div class="tab-pane fade in active" id="mypictures">
                                     <div class="container">
 
                                         <div class="col-lg-10 ">
@@ -116,14 +116,35 @@
 
                                         <div class="container">
                                             <div class="col-md-8 ">
-                                                <h1> My Map test </h1>
-                                                <br>
-                                                <div class="form-group">
-                                                    <div id="map-canvas" style="width:800px;height:410px;align:center;"></div>
 
+
+                                                <div class="form-group" id="form1">
+                                                    <label class="col-md-4 control-label"></label>
                                                 </div>
-                                                <button class="btn btn-success" onclick="doClickFunct('showmap')"> Show my pictures</button>
-                                                <button class="btn btn-success" onclick="doClickFunct('showmap2')"> Show all pictures</button>
+
+                                                <div class="map-responsive">
+                                                    <div id="map-canvas"style='width:100%;height:350px;'></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-14">
+                                                        <button class="btn btn-success" onclick="doClickFunct('showmap')"> Show my pictures</button>
+                                                        <button class="btn btn-success" onclick="doClickFunct('showmap2')"> Show all pictures</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input class="col-md-6" type="text"  id="searchname" class="form-control" placeholder="Search by name...">
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-success" id="buttonsearch" onclick="doSearchfun('showmap3')">Go</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" id="form1">
+                                                    <label class="col-md-4 control-label"></label>
+                                                </div>
+
 
                                             </div>
                                         </div>
@@ -136,7 +157,7 @@
                                             <div class="col-md-7 col-sm-offset-1  ">
 
                                                         <form class="form-horizontal" method="POST" action='storage/create' accept-charset="UTF-8" enctype="multipart/form-data">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
                                                             <div class="form-group" id="form1">
                                                                 <label class="col-md-4 control-label"></label>
@@ -161,7 +182,12 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <div id="map-canvas2" style="width:780px;height:410px;align:right;"></div>
+                                                            <div class="map-responsive">
+
+                                                                <div class="col-lg-20">
+                                                                    <div id="map-canvas2"  style='width:100%;height:400px;'></div>
+                                                                </div>
+                                                            </div>
                                                             </div>
 
 
@@ -237,6 +263,74 @@
     <script type="text/javascript">
 
 
+        function doSearchfun(tipo) {
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                center: {lat: 48.614399, lng: 21.616646},
+                scrollwheel: true,
+                zoom: 2,
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+            });
+
+            var order = document.getElementById('searchname').value;
+
+            //"info/" + $('input-field-selector').val(),
+
+            $.ajax({
+                url: 'showmap3',
+                method: 'get',
+                data: {
+                    'argument1': order
+                }
+
+            }).done(function (data) {
+                $.each(data, function (key, val) {
+                    console.log(data);
+                    var nombre1 = val.filename;
+                    var latt1 = val.lattitude;
+                    var lng1 = val.longitude;
+
+                    console.log(latt1);
+                    console.log(lng1);
+
+                    var image1 = {
+                        url: "pictures/" + nombre1, //url
+                        scaledSize: new google.maps.Size(44, 32), // scaled size
+                        origin: new google.maps.Point(0, 0), // origin
+                        anchor: new google.maps.Point(0, 0) // anchor
+
+                    }
+
+                    var content1 = '<div id="iw_container" class="map-info-window">' +
+                            '<div class="iw_title" style=" font-weight: bold;"> Name: </div>' + nombre1 +
+                            '<div class="iw_content" style=" font-weight: bold;"> Lattitude:</div>' + latt1 +
+                            '<div class="iw_content" style=" font-weight: bold;">Longitude:</div>' + lng1 +
+                            '<div class="iw_content"> <br><img src="pictures/' + nombre1 + '" style="height:300px;width:500px;float:left;"/> </div>'
+                    '</div>';
+
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: content1,
+
+                    });
+
+                    var marker1 = new google.maps.Marker({
+                        position: new google.maps.LatLng(latt1, lng1),
+                        map: map,
+                        title: nombre1,
+                        animation: google.maps.Animation.DROP,
+                        draggable: false,
+                        icon: image1,
+
+
+                    });
+                    google.maps.event.addListener(marker1, 'click', function () {
+                        infowindow.open(map, marker1);
+                    });
+                });
+            });
+        }
+
         function doClickFunct(tipo){
             if (tipo==''){
                 tipo = 'showmap'
@@ -246,11 +340,8 @@
                 scrollwheel: true,
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.HYBRID,
-                mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER
-                },
-
             });
+
 
             $.get(tipo, function(data){
                 console.log(data);
@@ -291,17 +382,12 @@
                         draggable: false,
                         icon: image,
 
-
                     });
-                    google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.open(map,marker);
-                    });
-
                 });
-
             });
-
         }
+
+
 
         $("#map-canvas").css({border: '5px solid silver'});
         $("#map-canvas2").css({border: '5px solid silver'});
@@ -315,9 +401,7 @@
                 scrollwheel: true,
                 zoom: 2,
                 mapTypeId: google.maps.MapTypeId.HYBRID,
-                mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER
-                },
+
             });
 
             var marker = new google.maps.Marker({
@@ -326,6 +410,8 @@
                 title: 'First test!',
                 draggable: true
             });
+            google.maps.event.addDomListener(window, 'resize', initialize);
+            google.maps.event.addDomListener(window, 'load', initialize);
 
             var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
 
@@ -415,6 +501,7 @@
             width:550px;
             height:350px;
         }
+
 
         @endif
 

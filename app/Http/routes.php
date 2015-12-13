@@ -59,6 +59,9 @@ Route::get('usermain', [ 'uses' => 'UserController@index',
 Route::get('showmap', [ 'uses' => 'StorageController@showmap1',
     'as' => 'showmap'] );
 
+Route::get('showmap3', [ 'uses' => 'StorageController@showmap3',
+    'as' => 'showmap3'] );
+
 
 Route::get('showmap2', [ 'uses' => 'StorageController@showmap2',
     'as' => 'showmap2'] );

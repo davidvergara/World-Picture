@@ -74,7 +74,7 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $id)
+    public function update($id)
     {
         $user = User::find($id);
         $user->fill(Request::all());
@@ -83,7 +83,7 @@ class SettingsController extends Controller
         Session::flash('flash_message', 'Well done! Your changes have been saved.');
         Session::flash('flash_type', 'alert-success');
 
-        return redirect::to('/showpictures');
+        return redirect::to('/');
 
     }
 

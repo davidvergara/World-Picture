@@ -139,6 +139,23 @@ class StorageController extends Controller
         return response()->json($thumbnails);
     }
 
+    public function showmap3()
+    {
+
+        $arg1 = $_GET['argument1'];
+
+        $thumbnails = \DB::table('fileentries')
+            ->where(function ($query) use ($arg1) {
+                $query->select('fileentries.id', 'fileentries.user_id', 'fileentries.filename'
+                    , 'fileentries.path', 'fileentries.lattitude', 'fileentries.longitude'
+                    , 'fileentries.created_at', 'fileentries.updated_at')
+                    ->where('fileentries.filename','LIKE', '%'.$arg1.'%');
+            })->get();
+        $control = 'map';
+
+        return response()->json($thumbnails);
+    }
+
 
     public function delete($picture)
     {
