@@ -74,130 +74,6 @@
                     <div class="panel-heading">
                         <ul class="nav nav-tabs nav-justified" id="myTabs">
 
-                        @if ($control == "map")
-                            <li ><a href="#mypictures" data-toggle="tab"> <span class="glyphicon glyphicon-camera"></span>  My pictures </a>
-                            </li>
-                            <li class="active"><a href="#mymap" data-toggle="tab">  <span class="glyphicon glyphicon-globe"></span> My Map </a>
-                            </li>
-                            <li><a href="#other"  data-toggle="tab"> <span class="glyphicon glyphicon-picture"></span> Upload pictures </a></li>
-
-                                <div class="tab-content">
-                                    <div class="tab-pane fade" id="mypictures"> <h4> My pictures  </h4>
-                                        <div class="container">
-                                            <div class="col-lg-10 ">
-                                                @if ( $thumbnails=='')
-                                                    {!!  link_to_route('showpictures', 'Show pictures', null, array('class' => 'btn btn-primary')) !!}
-                                                @elseif($thumbnails != '')
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            @foreach($thumbnails as $thumbnail)
-                                                                <div class="col-lg-5 col-md-8 col-xs-10">
-
-                                                                    <div class="thumbnail">
-
-                                                                        <img id="imageresource" src="pictures/{{$thumbnail->filename}}" style="width:360px;height:240px;"></a></li>
-                                                                        <h4 class="text-primary"><span class="label label-primary center-block">Lattitude: {{$thumbnail->lattitude}}</span></h4>
-                                                                        <h4 class="text-primary"><span class="label label-primary center-block">Longitude: {{$thumbnail->longitude}}</span></h4>
-                                                                        <div class="caption">
-                                                                            {!! Form::open(array('route' => array('deletepictures', $thumbnail->filename), 'method' => 'delete')) !!}
-                                                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger center-block', 'onclick'=>"return confirm('Are you sure you want to delete this picture?')"]) !!}
-                                                                            {!! Form::close() !!}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="tab-pane fade in active" id="mymap" > <h4>
-
-                                            <div class="container">
-                                                <div class="col-md-8 ">
-                                                    <h1> My Map test
-                                                        <script>doClickFunct();</script>
-                                                    </h1>
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <div id="map-canvas" style="width:780px;height:410px;"></div>
-                                                    </div>
-
-
-                                                    {!!  link_to_route('showmap', 'Show my pictures', null, array('class' => 'btn btn-primary')) !!}
-
-                                                </div>
-                                            </div>
-                                        </h4> </div>
-
-                                    <div class="tab-pane fade" id="other"> <h4> Upload picture </h4>
-
-                                        <div class="container">
-
-                                            <div class="row">
-                                                <div class="col-sm-9 ">
-                                                    <div class="panel panel-primary">
-                                                        <div class="panel-heading">Add a new picture</div>
-                                                        <div class="panel-body">
-                                                            <form method="POST" action='storage/create' accept-charset="UTF-8" enctype="multipart/form-data">
-                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                                                                <div class="form-group" id="form1">
-                                                                    <label class="col-md-4 control-label">New file</label>
-                                                                    <div class="col-md-6">
-                                                                        <input type="file" class="form-control" name="file" required="true">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label class="col-md-4 control-label">Enter a place</label>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="searchmap" class="form-control" name="lng">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <div id="map-canvas2" style="width:780px;height:410px;"></div>
-                                                                </div>
-
-
-                                                                <div class="form-group" id="form2">
-                                                                    <label class="col-md-4 control-label">Lattitude </label>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="lat" pattern="^[-+]?([1-8]?\d(\.\d{1,20})?|90(\.0{1,20})?)$" title="This is an error message" class="form-control" name="lat"  required="true">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group" id="form3">
-                                                                    <label class="col-md-4 control-label">Longitude</label>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" id="lng" pattern="^\s*[-+]?(180(\.0{1,20})?|((1[0-7]\d)|([1-9]?\d))(\.\d{1,20})?)$" title="This is an error message" class="form-control" name="lng"  required="true">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <div class="col-md-7 col-md-offset-4">
-                                                                        <br>
-                                                                        <button type="submit" class="btn btn-success">Upload</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                        </ul>
-
-                        @else
                             <li class="active"><a href="#mypictures" data-toggle="tab"> <span class="glyphicon glyphicon-camera"></span>  My pictures</a>
                             </li>
                             <li><a href="#mymap"  data-toggle="tab">  <span class="glyphicon glyphicon-globe"></span>  My Map</a>
@@ -247,12 +123,9 @@
                                                 <h1> My Map test </h1>
                                                 <br>
                                                 <div class="form-group">
-                                                    <div id="map-canvas" style="width:780px;height:410px;"></div>
+                                                    <div id="map-canvas" style="width:800px;height:410px;align:center;"></div>
 
                                                 </div>
-
-
-
                                                 <button class="btn btn-success" onclick="doClickFunct('showmap')"> Show my pictures</button>
                                                 <button class="btn btn-success" onclick="doClickFunct('showmap2')"> Show all pictures</button>
 
@@ -260,17 +133,22 @@
                                         </div>
                                     </h4> </div>
 
-                                <div class="tab-pane fade" id="other"> <h4> Upload picture </h4>
+                                <div class="tab-pane fade" id="other">
 
                                     <div class="container">
 
-                                        <div class="row">
-                                            <div class="col-sm-9 ">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">Add a new picture</div>
-                                                    <div class="panel-body">
-                                                        <form method="POST" action='storage/create' accept-charset="UTF-8" enctype="multipart/form-data">
+                                            <div class="col-md-7 col-sm-offset-1  ">
+
+                                                        <form class="form-horizontal" method="POST" action='storage/create' accept-charset="UTF-8" enctype="multipart/form-data">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                                            <div class="form-group" id="form1">
+                                                                <label class="col-md-4 control-label"></label>
+                                                            </div>
+
+                                                            <div class="form-group" id="form1">
+                                                                <label class="col-md-4 control-label"></label>
+                                                            </div>
 
                                                             <div class="form-group" id="form1">
                                                                 <label class="col-md-4 control-label">New file</label>
@@ -287,7 +165,7 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <div id="map-canvas2" style="width:780px;height:410px;"></div>
+                                                                <div id="map-canvas2" style="width:780px;height:410px;align:right;"></div>
                                                             </div>
 
 
@@ -306,23 +184,19 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <div class="col-md-7 col-md-offset-4">
+                                                                <div class="col-md-8 col-md-offset-5">
                                                                     <br>
                                                                     <button type="submit" class="btn btn-success">Upload</button>
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                    </div>
-                                                </div>
+
                                             </div>
-                                        </div>
+
                                     </div>
 
                                 </div>
                             </div>
-
-
-                        @endif
 
                     </div>
                     <div class="panel-body">
@@ -343,7 +217,7 @@
     <script src="jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"> </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&libraries=places&callback=initMap" async="async">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBsKT5uCocA4gfabJk6RBgssqTYspQIk&libraries=places&callback=initmap" async="async">
     </script>
 
 
@@ -373,7 +247,10 @@
                 center: {lat: 48.614399, lng: 21.616646},
                 scrollwheel: true,
                 zoom: 2,
-                mapTypeId: google.maps.MapTypeId.HYBRID
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER
+                },
 
             });
 
@@ -392,9 +269,21 @@
                         scaledSize: new google.maps.Size(44, 32), // scaled size
                         origin: new google.maps.Point(0, 0), // origin
                         anchor: new google.maps.Point(0, 0) // anchor
+
                     }
 
+                    var content1  = '<div id="iw_container" class="map-info-window">' +
+                    '<div class="iw_title" style=" font-weight: bold;"> Name: </div>' + nombre +
+                    '<div class="iw_content" style=" font-weight: bold;"> Lattitude:</div>' + latt +
+                    '<div class="iw_content" style=" font-weight: bold;">Longitude:</div>' + lng +
+                    '<div class="iw_content"> <br><img src="pictures/'+ nombre + '" style="height:300px;width:500px;float:left;"/> </div>'
+                    '</div>';
 
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: content1,
+
+                    });
 
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(latt, lng),
@@ -402,20 +291,22 @@
                         title: nombre,
                         animation: google.maps.Animation.DROP,
                         draggable: false,
-                        icon: image
+                        icon: image,
+
 
                     });
-                    var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
-                        content: '<img border="0" aling="Left" src=nombre >' + nombre
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-                        infowindow.open(map,marker); // Open our InfoWindow
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
                     });
 
                 });
+
             });
+
         }
+
+        $("#map-canvas").css({border: '5px solid silver'});
+        $("#map-canvas2").css({border: '5px solid silver'});
 
         $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', doClickFunct);
 
@@ -425,10 +316,11 @@
                 center: {lat: 48.614399, lng: 21.616646},
                 scrollwheel: true,
                 zoom: 2,
-                mapTypeId: google.maps.MapTypeId.HYBRID
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER
+                },
             });
-
-
 
             var marker = new google.maps.Marker({
                 position: {lat: 48.614399, lng: 21.616646},
@@ -517,6 +409,11 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
+        }
+
+        .map-info-window {
+            width:550px;
+            height:350px;
         }
     </style>
 

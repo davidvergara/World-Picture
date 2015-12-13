@@ -15,7 +15,6 @@ use App\Fileentry;
 use Illuminate\Support\Facades\Redirect;
 
 
-
 class StorageController extends Controller
 {
     /**
@@ -50,9 +49,9 @@ class StorageController extends Controller
             return redirect::to('/showpictures');
         }
 
-
         \Storage::disk('local')->put($nombre,  \File::get($file));
         $entry = new Fileentry();
+
         // $entry->mime = $file->getClientMimeType();
         //$entry->original_filename = $file->getClientOriginalName();
         $entry->filename = $file->getClientOriginalName();
