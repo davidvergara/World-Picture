@@ -36,17 +36,17 @@ class StorageController extends Controller
         $lat = $input['lat'];
         $lng = $input['lng'];
         $nombre = $file->getClientOriginalName();
-        //$extension = $file->getClientOriginalExtension();
+        $filename = pathinfo($nombre, PATHINFO_FILENAME);
+        $extension = $file->getClientOriginalExtension();
         $user = Auth::user()->id;
         //$user = User::findOrFail($id);
         $public_path = public_path();
 
-        if (\Storage::exists($nombre))
+        while (\Storage::exists($nombre))
         {
-            Session::flash('flash_message', 'Alert! The name of the picture is already in use.');
-            Session::flash('flash_type', 'alert-danger');
-
-            return redirect::to('/');
+            $nombre=$filename.'1'.'.'.$extension;
+            $filename=$filename.'1';
+            echo $nombre;
         }
 
         \Storage::disk('local')->put($nombre,  \File::get($file));
@@ -54,11 +54,12 @@ class StorageController extends Controller
 
         // $entry->mime = $file->getClientMimeType();
         //$entry->original_filename = $file->getClientOriginalName();
-        $entry->filename = $file->getClientOriginalName();
-        //$entry->path = $file->getRealPath();
-        $entry->path = $public_path;
+
+        $entry->filename = $nombre;
         $entry->lattitude = $lat;
         $entry->longitude = $lng;
+        //$entry->path = $file->getRealPath();
+        $entry->path = $public_path;
         $entry->user_id = $user;
 
         $entry->save();
