@@ -253,7 +253,8 @@
 
 
 
-                                                <button class="btn btn-success" onclick="doClickFunct()"> Show pictures</button>
+                                                <button class="btn btn-success" onclick="doClickFunct('showmap')"> Show my pictures</button>
+                                                <button class="btn btn-success" onclick="doClickFunct('showmap2')"> Show all pictures</button>
 
                                             </div>
                                         </div>
@@ -364,7 +365,10 @@
     <script type="text/javascript">
 
 
-        function doClickFunct(){
+        function doClickFunct(tipo){
+            if (tipo==''){
+                tipo = 'showmap'
+            }
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat: 48.614399, lng: 21.616646},
                 scrollwheel: true,
@@ -373,7 +377,7 @@
 
             });
 
-            $.get('showmap', function(data){
+            $.get(tipo, function(data){
                 console.log(data);
                 $.each(data, function(key,val){
                     var nombre = val.filename;
@@ -393,7 +397,7 @@
 
 
                     var marker = new google.maps.Marker({
-                        position: {lat: latt, lng: lng},
+                        position: new google.maps.LatLng(latt, lng),
                         map: map,
                         title: nombre,
                         animation: google.maps.Animation.DROP,
@@ -412,7 +416,6 @@
                 });
             });
         }
-
 
         $('.nav-tabs a[href="#mymap"]').on('shown.bs.tab', doClickFunct);
 

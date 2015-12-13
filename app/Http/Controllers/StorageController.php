@@ -132,6 +132,13 @@ class StorageController extends Controller
         return response()->json($thumbnails);
     }
 
+    public function showmap2()
+    {
+        $thumbnails = Fileentry::all();
+
+        return response()->json($thumbnails);
+    }
+
 
     public function delete($picture)
     {
