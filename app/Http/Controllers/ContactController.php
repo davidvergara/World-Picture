@@ -53,7 +53,7 @@ class ContactController extends Controller
         if (Auth::guest())
           return redirect::to('/');
         else
-           return redirect::to('/showpictures');
+           return redirect::to('/');
 
     }
 

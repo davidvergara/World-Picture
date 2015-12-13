@@ -37,6 +37,6 @@ trait RegistersUsers
 
         Auth::login($this->create($request->all()));
 
-        return redirect('/showpictures');
+        return redirect('/');
     }
 }

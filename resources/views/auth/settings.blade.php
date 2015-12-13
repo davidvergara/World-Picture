@@ -29,7 +29,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                    <li><a href="{{(route('showpictures')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
+                    <li><a href="{{(route('home')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
                 <li><a href="{{ (route('contact')) }}"> <span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
 
@@ -87,7 +87,7 @@
                             <input type="password" id="messages" class="form-control" name="password" >
                         </div>
 
-                        {!!  link_to_route('showpictures', 'Back', null, array('class' => 'btn btn-primary')) !!}
+                        {!!  link_to_route('home', 'Back', null, array('class' => 'btn btn-primary')) !!}
                         <button type="submit" class="btn btn-success"> Save changes </button>
                         {!! Form::close() !!}
 
@@ -100,7 +100,7 @@
 <style>
 
     body {
-         background: url('{{ asset('bosque3.jpg') }}')  no-repeat center center fixed;
+         background: url('{{ asset('bosque3.JPG') }}')  no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;

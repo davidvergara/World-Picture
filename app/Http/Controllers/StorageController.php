@@ -46,7 +46,7 @@ class StorageController extends Controller
             Session::flash('flash_message', 'Alert! The name of the picture is already in use.');
             Session::flash('flash_type', 'alert-danger');
 
-            return redirect::to('/showpictures');
+            return redirect::to('/');
         }
 
         \Storage::disk('local')->put($nombre,  \File::get($file));
@@ -66,7 +66,7 @@ class StorageController extends Controller
         Session::flash('flash_message', 'Well done! Your picture has been uploaded succesfully.');
         Session::flash('flash_type', 'alert-success');
 
-        return redirect::to('/showpictures');
+        return redirect::to('/');
     }
 
     /**
@@ -112,7 +112,7 @@ class StorageController extends Controller
         //$thumbnails = Fileentry::all();
        // echo $thumbnails;
 
-        return view('layout.master2', compact('thumbnails' , 'control'));
+        return view('layout.master2', compact('thumbnails'));
     }
 
     public function showmap1()
@@ -151,7 +151,7 @@ class StorageController extends Controller
         Session::flash('flash_type', 'alert-success');
 
         //$thumbnails = Fileentry::all();
-        return redirect::to('/showpictures');
+        return redirect::to('/');
     }
 
 

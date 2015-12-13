@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
 
 class HomeController extends Controller {
 	/*
@@ -22,6 +23,26 @@ class HomeController extends Controller {
 	{
 		//$conn = DB::connection('mysql');
 
-		return view('home');
+
+	if (Auth::guest()){
+			return view('home');
+		}
+		else{
+			$userId = Auth::user()->id;
+			$thumbnails = \DB::table('fileentries')
+					->where(function ($query) use ($userId) {
+						$query->select('fileentries.id', 'fileentries.user_id', 'fileentries.filename'
+								, 'fileentries.path', 'fileentries.lattitude', 'fileentries.longitude'
+								, 'fileentries.created_at', 'fileentries.updated_at')
+								->where('fileentries.user_id', '=', $userId);
+					})->get();
+
+
+
+			return view('layout.master2', compact('thumbnails'));
+
+
+		}
 	}
+
 }

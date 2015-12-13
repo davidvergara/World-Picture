@@ -32,7 +32,7 @@
                 @if (Auth::guest())
                     <li><a href="/"> <span class="glyphicon glyphicon-home"></span> Home</a></li>
                 @else
-                    <li><a href="{{(route('showpictures')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
+                    <li><a href="{{(route('home')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
                 @endif
             </ul>
 
@@ -90,7 +90,7 @@
                             <label for="messages"> Message </label>
                             <textarea type="text" id="messages" class="form-control" name="messages" > </textarea>
                         </div>
-                        {!!  link_to_route('showpictures', 'Back', null, array('class' => 'btn btn-primary')) !!}
+                        {!!  link_to_route('home', 'Back', null, array('class' => 'btn btn-primary')) !!}
                         <button type="submit" class="btn btn-success"> Send </button>
 
                     {!! Form::close() !!}

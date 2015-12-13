@@ -11,8 +11,11 @@
 |
 */
 
+
 Route::get('/', [ 'uses' => 'HomeController@index',
- 'as' => 'home'] );
+    'as' => 'home'] );
+
+
 
 // Authentication routes...
 Route::get('login', ['uses' => 'Auth\AuthController@getLogin',
@@ -27,6 +30,9 @@ Route::get('logout', [ 'uses' => 'Auth\AuthController@getLogout',
 //CONTACT....
 Route::get('contact', [ 'uses' => 'ContactController@index',
     'as' => 'contact'] );
+
+Route::get('missing', [ 'uses' => 'MissingController@index',
+    'as' => 'missing'] );
 
 Route::resource('mail', 'ContactController');
 
@@ -49,11 +55,10 @@ Route::post('storage/create', [ 'uses' => 'StorageController@save',
 Route::get('usermain', [ 'uses' => 'UserController@index',
     'as' => 'usermain'] );
 
-Route::get('showpictures', [ 'uses' => 'StorageController@show',
-    'as' => 'showpictures'] );
 
 Route::get('showmap', [ 'uses' => 'StorageController@showmap1',
     'as' => 'showmap'] );
+
 
 Route::get('showmap2', [ 'uses' => 'StorageController@showmap2',
     'as' => 'showmap2'] );

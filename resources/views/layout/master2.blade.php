@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 <img style="max-width:200px; margin-top: -7px;" src="/pictureworldlogoBLUE.png">
             </a>
 
@@ -31,11 +31,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="{{(route('showpictures')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
+                <li><a href="{{(route('home')) }}"> <span class="glyphicon glyphicon-home"></span>  Home </a></li>
                 <li><a href="{{ (route('contact')) }}"> <span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>
-
-
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
@@ -74,6 +72,7 @@
                     <div class="panel-heading">
                         <ul class="nav nav-tabs nav-justified" id="myTabs">
 
+
                             <li class="active"><a href="#mypictures" data-toggle="tab"> <span class="glyphicon glyphicon-camera"></span>  My pictures</a>
                             </li>
                             <li><a href="#mymap"  data-toggle="tab">  <span class="glyphicon glyphicon-globe"></span>  My Map</a>
@@ -86,9 +85,7 @@
                                     <div class="container">
 
                                         <div class="col-lg-10 ">
-                                            @if ( $thumbnails=='')
-                                                {!!  link_to_route('showpictures', 'Show pictures', null, array('class' => 'btn btn-primary')) !!}
-                                            @elseif($thumbnails != '')
+
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         @foreach($thumbnails as $thumbnail)
@@ -110,7 +107,6 @@
                                                     </div>
                                                 </div>
 
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +193,8 @@
 
                                 </div>
                             </div>
+
+
 
                     </div>
                     <div class="panel-body">
@@ -402,19 +400,25 @@
     </script>
 
     <style>
+        @if (Auth::guest())
 
-        body {
-            background: url('{{ asset('puestasol.JPG') }}')  no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
 
+        @else
+            body {
+                background: url('{{ asset('puestasol.JPG') }}')  no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
         .map-info-window {
             width:550px;
             height:350px;
         }
+
+        @endif
+
+
     </style>
 
 

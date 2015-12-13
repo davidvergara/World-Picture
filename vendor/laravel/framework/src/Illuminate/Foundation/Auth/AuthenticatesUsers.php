@@ -94,7 +94,7 @@ trait AuthenticatesUsers
             return $this->authenticated($request, Auth::user());
         }
 
-        return redirect('/showpictures');
+        return redirect('/');
     }
 
     /**
