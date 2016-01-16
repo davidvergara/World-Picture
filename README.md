@@ -1,4 +1,4 @@
-# World-Picture
+# PictureWorld
 Project for Dynamic Web Systems course at Luleå University of Technology
 
 PictureWorld is a web application for picture uploading and management using geolocation. 
